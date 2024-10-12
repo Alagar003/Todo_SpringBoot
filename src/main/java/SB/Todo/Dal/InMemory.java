@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class InMemory implements Dbrep {
+public class InMemory implements DbRepository {
     private final HashMap<String, Todo> todoMap = new HashMap<>();
 
     @Override

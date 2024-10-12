@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TodoRep implements Dbrep {
+public class TodoRep implements DbRepository {
 
     @Autowired
     private MongoRep mongoRep;

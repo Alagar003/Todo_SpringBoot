@@ -1,6 +1,6 @@
 package SB.Todo.Config;
 
-import SB.Todo.Dal.Dbrep;
+import SB.Todo.Dal.DbRepository;
 import SB.Todo.Dal.InMemory;
 import SB.Todo.Dal.TodoRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class TodoConfig {
     }
 
     @Bean(name = "todorepository")
-    public Dbrep TodoRep () {
+    public DbRepository TodoRep () {
         if ("inMemory".equalsIgnoreCase(dbType)) {
             return inmemory;
         } else {
