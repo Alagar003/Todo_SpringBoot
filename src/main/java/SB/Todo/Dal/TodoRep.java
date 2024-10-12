@@ -2,40 +2,40 @@ package SB.Todo.Dal;
 
 import SB.Todo.Model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class TodoRep {
+public class TodoRep implements Dbrep {
 
     @Autowired
-    private MongoRep mongoRep; // MongoRep should be an interface extending MongoRepository
-
-    public List<Todo> getTodoList() {
-        return mongoRep.findAll(); // Fetch all todos from MongoDB
+    private MongoRep mongoRep;
+    @Override
+    public List<Todo> gettodo() {
+        return mongoRep.findAll();
     }
 
-    public Todo addTodo(Todo todo) {
-        return mongoRep.save(todo); // Save the new todo; MongoDB generates the ID
+    @Override
+    public Todo createtodo(Todo todo) {
+        return mongoRep.save(todo);
     }
 
+    @Override
     public Todo updateTodo(String id, Todo newTodo) {
-        // Check if the Todo exists
         if (!mongoRep.existsById(id)) {
             throw new RuntimeException("Todo not found");
         }
-
-        newTodo.setId(id); // Set the existing ID for the update
-        return mongoRep.save(newTodo); // Update the existing todo
+        newTodo.setId(id);
+        return mongoRep.save(newTodo);
     }
 
-    public void deletetodo(String id) {
+    @Override
+    public void deleteById(String id) {
         if (!mongoRep.existsById(id)) {
             throw new RuntimeException("Todo not found");
         }
-        mongoRep.deleteById(id); // Delete the todo by ID
+        mongoRep.deleteById(id);
     }
 
     public Todo findById(String id) {

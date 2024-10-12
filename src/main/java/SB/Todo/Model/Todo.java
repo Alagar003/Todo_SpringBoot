@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Todo {
 
     @Id
-    private String id; // MongoDB will generate this automatically
+    private String id;
     private String title;
     private String description;
 

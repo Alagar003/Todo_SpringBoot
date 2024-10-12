@@ -1,8 +1,9 @@
 package SB.Todo.Service;
 
 import SB.Todo.Model.Todo;
-import SB.Todo.Dal.TodoRep; // Update the import statement
+import SB.Todo.Dal.Dbrep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,24 +11,27 @@ import java.util.List;
 @Service
 public class TodoService {
 
+    private final Dbrep dbrep;
+
+    // Constructor injection is preferred
     @Autowired
-    private TodoRep todoRep;
+    public TodoService(@Qualifier("todorepository") Dbrep dbrep) {
+        this.dbrep = dbrep;
+    }
 
     public List<Todo> getAllTodos() {
-        return todoRep.getTodoList();
+        return dbrep.gettodo();
     }
 
     public Todo createTodo(Todo todo) {
-        return todoRep.addTodo(todo);
+        return dbrep.createtodo(todo);
     }
 
     public Todo updateTodo(String id, Todo newTodo) {
-        return todoRep.updateTodo(id, newTodo);
+        return dbrep.updateTodo(id, newTodo);
     }
 
     public void deleteTodoById(String id) {
-        todoRep.deletetodo(id);
+        dbrep.deleteById(id);
     }
-
-
 }
