@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TodoRep implements DbRepository {
+public class MongoTodoRep implements DbRepository {
 
     @Autowired
     private MongoRep mongoRep;
