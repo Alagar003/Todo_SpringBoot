@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TodoRep implements DbRepository {
@@ -37,6 +38,12 @@ public class TodoRep implements DbRepository {
         }
         mongoRep.deleteById(id);
     }
+
+
+    public Optional<Todo> getTodoById(String id) {
+        return null;
+    }
+
 
     public Todo findById(String id) {
         return mongoRep.findById(id).orElse(null); // Return todo if found

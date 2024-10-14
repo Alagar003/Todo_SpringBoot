@@ -2,6 +2,7 @@ package SB.Todo.Config;
 
 import SB.Todo.Dal.DbRepository;
 import SB.Todo.Dal.InMemory;
+import SB.Todo.Dal.PostgresTodoRepository;
 import SB.Todo.Dal.TodoRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,9 @@ public class TodoConfig {
     @Autowired
     private InMemory inmemory;
 
+    @Autowired
+    private PostgresTodoRepository postgresTodoRepository;
+
     public TodoConfig(TodoRep mongoRep, InMemory inmemory) {
         this.mongoRep = mongoRep;
         this.inmemory = inmemory;
@@ -29,8 +33,11 @@ public class TodoConfig {
     public DbRepository TodoRep () {
         if ("inMemory".equalsIgnoreCase(dbType)) {
             return inmemory;
-        } else {
+        } else if ("mongo".equalsIgnoreCase(dbType)) {
             return  mongoRep;
+        }
+        else {
+            return postgresTodoRepository;
         }
     }
 }

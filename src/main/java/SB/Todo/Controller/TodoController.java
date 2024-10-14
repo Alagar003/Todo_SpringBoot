@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/todos")
@@ -20,13 +21,17 @@ public class TodoController {
     }
 
     @PostMapping
-    public Todo createTodo(@RequestBody Todo todo) {
-        return todoService.createTodo(todo);
+    public Optional<Todo> createTodo(@RequestBody Todo todo) {
+        System.out.println("Received Todo: " + todo);
+        Todo createdTodo = todoService.createTodo(todo);
+        System.out.println("Created Todo: " + createdTodo);
+        return Optional.ofNullable(createdTodo);
     }
 
+
     @PutMapping("/{id}")
-    public Todo updateTodo(@PathVariable String id, @RequestBody Todo newTodo) {
-        return todoService.updateTodo(id, newTodo); // Use the service for updating
+    public Optional<Todo> updateTodo(@PathVariable String id, @RequestBody Todo newTodo) {
+        return Optional.ofNullable(todoService.updateTodo(id, newTodo));
     }
 
     @DeleteMapping("/{id}")

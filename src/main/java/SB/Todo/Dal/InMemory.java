@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class InMemory implements DbRepository {
@@ -38,7 +39,13 @@ public class InMemory implements DbRepository {
         todoMap.remove(id);
     }
 
+
+    public Optional<Todo> getTodoById(String id) {
+        return null;
+    }
+
+
     private String generateNewId() {
-        return String.valueOf(todoMap.size() + 1);
+        return String.valueOf(todoMap.size() + 198765456);
     }
 }
